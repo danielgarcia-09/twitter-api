@@ -1,11 +1,9 @@
 import { ConfigService } from "@nestjs/config/dist";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import dotenv from 'dotenv';
+import 'dotenv/config';
 import { join } from "path";
 import { DataSource, DataSourceOptions } from "typeorm";
 import { PostgresConnectionOptions } from "typeorm/driver/postgres/PostgresConnectionOptions";
-
-dotenv.config()
 
 let generalConfig: PostgresConnectionOptions = {
     type: 'postgres',
