@@ -1,5 +1,4 @@
-import { IsNotEmpty, IsObject, IsString } from "class-validator";
-import { UserEntity } from "../../entities";
+import { IsNotEmpty, IsNumber, IsString } from "class-validator";
 
 export class CreateTweetDto {
     @IsString()
@@ -7,6 +6,6 @@ export class CreateTweetDto {
     readonly message: string;
 
 
-    @IsObject()
-    readonly user: Partial<UserEntity>
+    @IsNumber()
+    readonly userId: number
 }

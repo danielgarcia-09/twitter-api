@@ -1,3 +1,4 @@
+import { Exclude } from "class-transformer";
 import { Column, Entity, OneToMany } from "typeorm";
 
 import { BaseEntity } from "./base.entity";
@@ -15,6 +16,7 @@ export class UserEntity extends BaseEntity{
     @Column()
     username: string
 
+    @Exclude({ toPlainOnly: true })
     @Column()
     password: string
 
