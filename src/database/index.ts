@@ -1,4 +1,4 @@
-import { ConfigService } from "@nestjs/config/dist";
+import { ConfigService } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import 'dotenv/config';
 import { join } from "path";

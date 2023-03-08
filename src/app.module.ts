@@ -12,7 +12,7 @@ import { UsersModule } from './modules/users/users.module';
     UsersModule, 
     TweetsModule, 
     DatabaseModule,
-    AuthModule
+    AuthModule,
   ],
   providers: [
     ConfigService,

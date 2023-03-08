@@ -25,8 +25,8 @@ export class TweetsService {
         return tweet
     }
 
-    async createTweet({ message }: CreateTweetDto): Promise<TweetEntity> {
-        const tweet = this.tweetRepository.create({ message })
+    async createTweet(payload: CreateTweetDto): Promise<TweetEntity> {
+        const tweet = this.tweetRepository.create(payload)
         return await this.tweetRepository.save(tweet)
     }
 

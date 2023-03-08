@@ -20,8 +20,8 @@ export class TweetsController {
     }
 
     @Post()
-    createTweet(@Body() message: CreateTweetDto): Promise<TweetEntity> {
-        return this.tweetService.createTweet(message);
+    createTweet(@Body() payload: CreateTweetDto): Promise<TweetEntity> {
+        return this.tweetService.createTweet(payload);
     }
 
     @Patch(':id')
