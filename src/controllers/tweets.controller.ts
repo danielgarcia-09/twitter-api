@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
-import { CreateTweetDto, PaginationDTO, UpdateTweetDto } from '../../database/dto';
-import { TweetEntity } from '../../database/entities';
-import { TweetsService } from './tweets.service';
+import { CreateTweetDto, PaginationDTO, UpdateTweetDto } from '../database/dto';
+import { TweetEntity } from '../database/entities';
+import { TweetsService } from '../services/tweets/tweets.service';
 
 @Controller('tweets')
 export class TweetsController {

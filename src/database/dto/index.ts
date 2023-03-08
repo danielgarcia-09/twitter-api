@@ -1,3 +1,4 @@
-export { CreateTweetDto } from './create-tweet.dto'
-export { UpdateTweetDto } from './update-tweet.dto'
-export { PaginationDTO } from './pagination.dto'
+export { CreateTweetDto } from './tweets/create-tweet.dto'
+export { UpdateTweetDto } from './tweets/update-tweet.dto'
+export { PaginationDTO } from './general/pagination.dto'
+export { SignInDTO } from './auth/sign-in.dto'
