@@ -1,6 +1,6 @@
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { BaseEntity } from "./base.entity";
+import { Column, Entity, OneToMany } from "typeorm";
 
+import { BaseEntity } from "./base.entity";
 import { TweetEntity } from "./tweet.entity";
 
 @Entity({ name: 'users' })
@@ -21,4 +21,7 @@ export class UserEntity extends BaseEntity{
     @OneToMany(() => TweetEntity, (tweet) => tweet.user)
     tweets: TweetEntity[]
 
+    isPasswordMatch(value: string) {
+        return value === this.password
+    }
 }
