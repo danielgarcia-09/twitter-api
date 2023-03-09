@@ -1,6 +1,5 @@
 import { ConfigService } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import 'dotenv/config';
 import { join } from "path";
 import { DataSource, DataSourceOptions } from "typeorm";
 import { PostgresConnectionOptions } from "typeorm/driver/postgres/PostgresConnectionOptions";
@@ -10,6 +9,7 @@ let generalConfig: PostgresConnectionOptions = {
     synchronize: false,
     entities: [join(__dirname, "./entities/**/*.entity.{ts,js}")],
     migrations: [join(__dirname, "./migrations/**/*.migration.{ts,js}")],
+    subscribers: [join(__dirname, "./subscribers/**/*.subscriber.{ts,js}")],
     migrationsTableName: "migrations"
 }
 
