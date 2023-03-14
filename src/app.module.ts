@@ -9,10 +9,10 @@ import { UsersModule } from './modules/users/users.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    UsersModule, 
-    TweetsModule, 
     DatabaseModule,
+    UsersModule, 
     AuthModule,
+    TweetsModule, 
   ],
   providers: [
     ConfigService,

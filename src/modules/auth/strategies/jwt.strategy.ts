@@ -3,13 +3,11 @@ import { ConfigService } from "@nestjs/config";
 import { PassportStrategy } from "@nestjs/passport";
 import { ExtractJwt, Strategy } from "passport-jwt";
 
-import { AppModule } from "src/app.module";
 import { cookiesConfig } from "src/config";
 import { UserEntity } from "src/database/entities";
 import { ExpressRequest } from "src/interfaces/general/general.interface";
 import { JwtPayload } from "src/interfaces/jwt/jwt.interface";
 import { UsersService } from "src/services/users/users.service";
-import { decrypt } from "src/utils/encryption.util";
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
