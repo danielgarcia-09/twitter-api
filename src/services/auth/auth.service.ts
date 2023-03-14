@@ -2,7 +2,6 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
 import { JwtPayload } from 'src/interfaces/jwt/jwt.interface';
-import { encrypt } from 'src/utils/encryption.util';
 import { SignInDTO } from '../../database/dto';
 import { SignUpDTO } from '../../database/dto/auth/sign-up.dto';
 import { UserEntity } from '../../database/entities';
@@ -50,6 +49,6 @@ export class AuthService {
 
         const token = this.jwtService.sign(jwtPayload)
 
-        return encrypt(token).toString('hex');
+        return token.encrypt('hex');
     }
 }

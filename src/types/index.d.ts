@@ -7,7 +7,16 @@ declare global {
             client: UserEntity
         }
     }
+
+
+    interface String {
+        encrypt(encoding: BufferEncoding): string
+        decrypt(encoding: BufferEncoding): string
+    }
 }
+
+
+
 
 
 export { }

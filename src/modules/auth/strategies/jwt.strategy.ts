@@ -33,8 +33,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
             req.cookies &&
             req.cookies[cookiesConfig.name]
         ) {
-            const buffer = Buffer.from(req.cookies[cookiesConfig.name], 'hex');
-            let decryptedToken = decrypt(buffer).toString()
+            let decryptedToken = `${req.cookies[cookiesConfig.name]}`.decrypt('hex');
             return decryptedToken
         }
         return null
