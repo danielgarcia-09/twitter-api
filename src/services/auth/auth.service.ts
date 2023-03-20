@@ -1,5 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import mailer from 'src/helpers/mailer/mailer.helper';
 
 import { JwtPayload } from 'src/interfaces/jwt/jwt.interface';
 import { SignInDTO } from '../../database/dto';
@@ -29,6 +30,12 @@ export class AuthService {
 
     async signUp(data: SignUpDTO): Promise<UserEntity> {
         const entity = await this.userService.create(data);
+        mailer.sendMessage({
+            from: 'test@gmail.com',
+            to: entity.email,
+            subject: 'Welcome to Twitter',
+            text: 'Welcome to Twitter',
+        })
         return entity
     }
 
@@ -41,6 +48,7 @@ export class AuthService {
         })
 
         if (!user || !user.isPasswordMatch(password)) throw new UnauthorizedException()
+        if(!user.active) throw new UnauthorizedException('User not active')
 
         const jwtPayload: JwtPayload = {
             username,

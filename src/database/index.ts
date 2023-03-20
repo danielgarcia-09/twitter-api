@@ -4,6 +4,9 @@ import { join } from "path";
 import { DataSource, DataSourceOptions } from "typeorm";
 import { PostgresConnectionOptions } from "typeorm/driver/postgres/PostgresConnectionOptions";
 
+import { databaseConfig } from "../config";
+
+console.log({path: join(__dirname, "./entities/**/*.entity.{ts,js}")})
 let generalConfig: PostgresConnectionOptions = {
     type: 'postgres',
     synchronize: false,
@@ -13,14 +16,9 @@ let generalConfig: PostgresConnectionOptions = {
     migrationsTableName: "migrations"
 }
 
+console.log("❗ ~ file: index.ts:21 ~ databaseConfig:", databaseConfig)
 const dbOptions: DataSourceOptions = {
-    host: process.env.DB_HOST,
-    port: Number(process.env.DB_PORT),
-    username: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    schema: process.env.DB_SCHEMA,
-    logging: process.env.DB_LOGGING === "true",
+    ...databaseConfig,
     ...generalConfig
 }
 

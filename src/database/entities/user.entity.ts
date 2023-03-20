@@ -21,6 +21,9 @@ export class UserEntity extends BaseEntity{
     @Column()
     password: string
 
+    @Column({ default: false })
+    active: boolean
+
     @OneToMany(() => TweetEntity, (tweet) => tweet.user)
     tweets: TweetEntity[]
 

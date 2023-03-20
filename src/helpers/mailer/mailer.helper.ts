@@ -1,12 +1,13 @@
-import { createTransport, Transporter, SendMailOptions, createTestAccount, getTestMessageUrl } from "nodemailer";
+import { createTestAccount, createTransport, getTestMessageUrl, Transporter } from "nodemailer";
+import { appConfig, mailerConfig } from "src/config";
 import { SendMailPayload } from "src/interfaces/mailer/mailer.interface";
 
 
 class Mailer {
     private transporter: Transporter;
     
-    private isProduction: boolean = process.env.NODE_ENV === "production";
-    private host = process.env.MAIL_HOST;
+    private isProduction: boolean = appConfig.isProd
+    private host = mailerConfig.host;
 
     constructor() {
         this.mailConfig().then(() => {
@@ -38,14 +39,17 @@ class Mailer {
     }
 
     private async prodConfig() {
+        console.log({
+            host: this.host,
+            port: 465,
+            secure: true,
+            auth: mailerConfig.auth
+        })
         this.transporter = createTransport({
             host: this.host,
             port: 465,
             secure: true,
-            auth: {
-                user: process.env.MAIL_USERNAME,
-                pass: process.env.MAIL_PASSWORD,
-            },
+            auth: mailerConfig.auth
         });
     }
 

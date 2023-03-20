@@ -1,13 +1,11 @@
 import { Body, Controller, Get, Post, Request, Response, UseGuards } from '@nestjs/common';
 import { Delete } from '@nestjs/common/decorators';
-import { ConfigService } from '@nestjs/config';
 
-import { AppModule } from 'src/app.module';
 import { cookiesConfig } from 'src/config';
 import { SignInDTO, SignUpDTO } from 'src/database/dto';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
+import mailer from 'src/helpers/mailer/mailer.helper';
 import { ExpressRequest, ExpressResponse } from 'src/interfaces/general/general.interface';
-import mailer from 'src/utils/mailer.util';
 import { AuthService } from '../services/auth/auth.service';
 // import { LocalAuthGuard } from 'src/guards/local-auth.guard';
 
@@ -49,14 +47,6 @@ export class AuthController {
     @Delete("sign-out")
     async signOut(@Response() res: ExpressResponse) {
         res.clearCookie(cookiesConfig.name)
-
-        await mailer.sendMessage({
-            from: "gohanvicio1345@gmail.com",
-            to: "daniel.garcia7913@gmail.com",
-            subject: "Test",
-            text: "Test"
-          }).catch(err => console.log(err))
-
         return res.json({ logged: false })
     }
 }
