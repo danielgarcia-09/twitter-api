@@ -1,11 +1,15 @@
 import { Exclude, instanceToPlain } from 'class-transformer'
-import { BaseEntity as OrmBaseEntity, CreateDateColumn, DeleteDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
+import { BaseEntity as OrmBaseEntity, Column, CreateDateColumn, DeleteDateColumn, Generated, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
 
 export class BaseEntity extends OrmBaseEntity {
 
     @Exclude({ toPlainOnly: true })
     @PrimaryGeneratedColumn()
     id: number
+
+    @Generated('uuid')
+    @Column('uuid')
+    uuid: string
 
     @CreateDateColumn({ type: 'timestamptz' })
     createdAt: Date

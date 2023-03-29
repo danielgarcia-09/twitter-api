@@ -1,13 +1,10 @@
-import { Body, Controller, Get, Post, Request, Response, UseGuards } from '@nestjs/common';
-import { Delete } from '@nestjs/common/decorators';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Request, Response, UseGuards } from '@nestjs/common';
 
 import { cookiesConfig } from 'src/config';
 import { SignInDTO, SignUpDTO } from 'src/database/dto';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
-import mailer from 'src/helpers/mailer/mailer.helper';
 import { ExpressRequest, ExpressResponse } from 'src/interfaces/general/general.interface';
 import { AuthService } from '../services/auth/auth.service';
-// import { LocalAuthGuard } from 'src/guards/local-auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -16,10 +13,8 @@ export class AuthController {
         private readonly authService: AuthService
     ) { }
 
-    // @UseGuards(LocalAuthGuard)
     @Post("sign-in")
     async signIn(
-        // @Request() req: ExpressRequest, 
         @Response() res: ExpressResponse,
         @Body() payload: SignInDTO
     ) {
@@ -35,7 +30,7 @@ export class AuthController {
 
     @Post("sign-up")
     async signUp(@Body() payload: SignUpDTO) {
-        return this.authService.signUp(payload);
+        return await this.authService.signUp(payload);
     }
 
     @UseGuards(JwtAuthGuard)
@@ -44,9 +39,15 @@ export class AuthController {
         return req.client
     }
 
+    @UseGuards(JwtAuthGuard)
     @Delete("sign-out")
-    async signOut(@Response() res: ExpressResponse) {
+    async signOut(@Response() res: ExpressResponse): Promise<ExpressResponse> {
         res.clearCookie(cookiesConfig.name)
         return res.json({ logged: false })
+    }
+
+    @Patch("confirm-email/:token")
+    async confirmEmail(@Param("token") token: string) {
+        return await this.authService.confirmEmail(token)
     }
 }

@@ -4,6 +4,7 @@ import bcryptjs from "bcryptjs";
 
 import { BaseEntity } from "./base.entity";
 import { TweetEntity } from "./tweet.entity";
+import { TokenEntity } from "./token.entity";
 
 @Entity({ name: 'users' })
 export class UserEntity extends BaseEntity{
@@ -23,6 +24,9 @@ export class UserEntity extends BaseEntity{
 
     @Column({ default: false })
     active: boolean
+
+    @OneToMany(() => TokenEntity, (token) => token.user)
+    tokens: TokenEntity[]
 
     @OneToMany(() => TweetEntity, (tweet) => tweet.user)
     tweets: TweetEntity[]

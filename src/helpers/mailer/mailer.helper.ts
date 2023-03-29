@@ -39,12 +39,6 @@ class Mailer {
     }
 
     private async prodConfig() {
-        console.log({
-            host: this.host,
-            port: 465,
-            secure: true,
-            auth: mailerConfig.auth
-        })
         this.transporter = createTransport({
             host: this.host,
             port: 465,
@@ -55,7 +49,6 @@ class Mailer {
 
     async sendMessage(payload: SendMailPayload) {
         const info = await this.transporter.sendMail(payload)
-        console.log("❗ ~ file: mailer.util.ts:54 ~ Mailer ~ sendMessage ~ info:", info)
         const messageUrl = getTestMessageUrl(info);
         console.log("❗ ~ file: mailer.util.ts:56 ~ Mailer ~ sendMessage ~ messageUrl:", messageUrl)
         return messageUrl;

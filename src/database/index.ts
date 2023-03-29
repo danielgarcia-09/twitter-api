@@ -6,7 +6,6 @@ import { PostgresConnectionOptions } from "typeorm/driver/postgres/PostgresConne
 
 import { databaseConfig } from "../config";
 
-console.log({path: join(__dirname, "./entities/**/*.entity.{ts,js}")})
 let generalConfig: PostgresConnectionOptions = {
     type: 'postgres',
     synchronize: false,
@@ -16,7 +15,6 @@ let generalConfig: PostgresConnectionOptions = {
     migrationsTableName: "migrations"
 }
 
-console.log("❗ ~ file: index.ts:21 ~ databaseConfig:", databaseConfig)
 const dbOptions: DataSourceOptions = {
     ...databaseConfig,
     ...generalConfig

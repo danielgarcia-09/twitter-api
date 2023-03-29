@@ -15,8 +15,4 @@ declare global {
     }
 }
 
-
-
-
-
 export { }

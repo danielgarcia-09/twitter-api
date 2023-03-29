@@ -1,4 +1,4 @@
-import { UserEntity } from "../../entities/user.entity";
+import { UserEntity } from "../../entities";
 import { EntitySubscriberInterface, EventSubscriber, InsertEvent } from "typeorm";
 
 @EventSubscriber()
