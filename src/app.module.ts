@@ -5,6 +5,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { DatabaseModule } from './modules/database/database.module';
 import { TweetsModule } from './modules/tweets/tweets.module';
 import { UsersModule } from './modules/users/users.module';
+import { TokensModule } from './modules/tokens/tokens.module';
 
 @Module({
   imports: [
@@ -12,7 +13,8 @@ import { UsersModule } from './modules/users/users.module';
     DatabaseModule,
     UsersModule, 
     AuthModule,
-    TweetsModule, 
+    TweetsModule,
+    TokensModule, 
   ],
   providers: [
     ConfigService,
