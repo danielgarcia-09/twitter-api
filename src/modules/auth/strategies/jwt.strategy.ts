@@ -41,12 +41,12 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
         const { sub: id, username } = payload;
         
-        const client = await this.userService.findOne({
+        const user = await this.userService.findOne({
             where: { id, username }
         })
 
-        if(!client) throw new UnauthorizedException();
+        if(!user) throw new UnauthorizedException();
                 
-        return client
+        return user
     }
 }

@@ -1,3 +1,4 @@
-export { UserEntity } from './user.entity'
-export { TweetEntity } from './tweet.entity';
-export { TokenEntity } from './token.entity';
+export { UserEntity } from './users/user.entity'
+export { TweetEntity } from './tweets/tweet.entity';
+export { TokenEntity } from './tokens/token.entity';
+export { FollowerEntity } from './followers/follower.entity';

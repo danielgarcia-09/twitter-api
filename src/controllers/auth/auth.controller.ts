@@ -4,7 +4,7 @@ import { cookiesConfig } from 'src/config';
 import { SignInDTO, SignUpDTO } from 'src/database/dto';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 import { ExpressRequest, ExpressResponse } from 'src/interfaces/general/general.interface';
-import { AuthService } from '../services/auth/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Controller('auth')
 export class AuthController {
@@ -25,7 +25,7 @@ export class AuthController {
             expires: new Date(Date.now() + +cookiesConfig.expiration),
         })
 
-        return res.json({ logged: true })
+        return res.status(200).json({ logged: true })
     }
 
     @Post("sign-up")

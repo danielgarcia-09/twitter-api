@@ -1,8 +1,8 @@
 import { Exclude } from "class-transformer";
 import { Column, Entity, JoinColumn, ManyToOne } from "typeorm";
 
-import { BaseEntity } from "./base.entity";
-import { UserEntity } from "./user.entity";
+import { BaseEntity } from "../base.entity";
+import { UserEntity } from "../users/user.entity";
 
 @Entity({ name: 'tweets' })
 export class TweetEntity extends BaseEntity{

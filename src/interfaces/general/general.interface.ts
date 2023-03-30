@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-export interface ExpressRequest extends Request {}
+export interface ExpressRequest<P = any, ResBody = any, ReqBody = any, ReqQuery = qs.ParsedQs> extends Request<P,ResBody, ReqBody, ReqQuery> {}
 export interface ExpressResponse extends Response {}
 
 export interface ObjectDynamicI {

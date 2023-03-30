@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateTweetDto, UpdateTweetDto } from '../../database/dto';
 import { Repository } from 'typeorm';
-import { TweetEntity } from '../../database/entities/tweet.entity';
+import { TweetEntity } from '../../database/entities/tweets/tweet.entity';
 
 @Injectable()
 export class TweetsService {

@@ -1,14 +1,18 @@
-import { IsNumber, IsOptional, IsPositive } from "class-validator";
+import { IsNumber, IsOptional, IsPositive, IsString } from "class-validator";
 
 export class PaginationDTO {
 
-    @IsNumber()
-    @IsPositive()
+    @IsString()
     @IsOptional()
-    skip: number
+    filter: string = '{}'
 
     @IsNumber()
     @IsPositive()
     @IsOptional()
-    take: number
+    skip: number = 1
+
+    @IsNumber()
+    @IsPositive()
+    @IsOptional()
+    take: number = 10
 }

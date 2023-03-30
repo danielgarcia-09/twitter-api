@@ -15,6 +15,7 @@ async function bootstrap() {
     transform: true,
     whitelist: true,
     forbidNonWhitelisted: true,
+    skipMissingProperties: true,
     transformOptions: {
       enableImplicitConversion: true
     }

@@ -1,4 +1,4 @@
-import { generateCode } from "src/utils/random.util";
+import { generateCode } from "../../../utils/random.util";
 import { EntitySubscriberInterface, EventSubscriber, InsertEvent } from "typeorm";
 import { TokenEntity } from "../../entities";
 

@@ -2,9 +2,9 @@ import { Exclude } from "class-transformer";
 import { Column, Entity, OneToMany } from "typeorm";
 import bcryptjs from "bcryptjs";
 
-import { BaseEntity } from "./base.entity";
-import { TweetEntity } from "./tweet.entity";
-import { TokenEntity } from "./token.entity";
+import { BaseEntity } from "../base.entity";
+import { TweetEntity } from "../tweets/tweet.entity";
+import { TokenEntity } from "../tokens/token.entity";
 
 @Entity({ name: 'users' })
 export class UserEntity extends BaseEntity{
@@ -22,6 +22,7 @@ export class UserEntity extends BaseEntity{
     @Column()
     password: string
 
+    @Exclude({ toPlainOnly: true })
     @Column({ default: false })
     active: boolean
 
