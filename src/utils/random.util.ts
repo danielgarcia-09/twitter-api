@@ -13,6 +13,8 @@ const codeOptions: CodeOptionsI = {
     symbols: '!@#$%^&*_-+='
 }
 
+export const calculateSkip = (skip = 1, take = 10): number => (skip - 1) * take
+
 export const getRandomRange = (min: number, max: number): number => Math.round(Math.random() * (max - min) + min)
 
 export const generateCode = (length: number = 6, options: CodeOptionsI = { lowercase: true, numbers: true }): string => {

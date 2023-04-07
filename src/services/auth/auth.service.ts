@@ -5,7 +5,6 @@ import { mailerConfig } from 'src/config';
 import mailer from 'src/helpers/mailer/mailer.helper';
 import { ResponseI } from 'src/interfaces/general/general.interface';
 import { JwtPayload } from 'src/interfaces/jwt/jwt.interface';
-import { generateCode } from 'src/utils/random.util';
 import { SignInDTO } from '../../database/dto';
 import { SignUpDTO } from '../../database/dto/auth/sign-up.dto';
 import { UserEntity } from '../../database/entities';
@@ -58,6 +57,7 @@ export class AuthService {
             })
 
             return {
+                code: 201,
                 message: `User created successfully, please check your email to activate your account`,
             }
         } catch (error) {
@@ -106,6 +106,7 @@ export class AuthService {
         })
 
         return {
+            code: 200,
             message: 'User activated successfully'
         }
     }

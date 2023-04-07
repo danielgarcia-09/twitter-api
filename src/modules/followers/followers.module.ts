@@ -12,6 +12,7 @@ import { UsersModule } from '../users/users.module';
         UsersModule
     ],
     providers: [FollowersService],
+    exports: [FollowersService],
     controllers: [FollowersController]
 })
 export class FollowersModule {}

@@ -4,6 +4,7 @@ import { PaginationDTO } from 'src/database/dto';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 import { ExpressRequest } from 'src/interfaces/general/general.interface';
 import { FollowersService } from 'src/services/followers/followers.service';
+import { calculateSkip } from 'src/utils/random.util';
 
 @UseGuards(JwtAuthGuard)
 @Controller('followers')
@@ -33,7 +34,7 @@ export class FollowersController {
                     username: true,
                 }
             },
-            skip: ((skip - 1) * take),
+            skip: calculateSkip(skip, take),
             take
         })
 
@@ -59,7 +60,7 @@ export class FollowersController {
                     username: true,
                 }
             },
-            skip: ((skip - 1) * take),
+            skip: calculateSkip(skip, take),
             take
         })
 

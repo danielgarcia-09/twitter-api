@@ -8,6 +8,7 @@ export interface ObjectDynamicI {
 }
 
 export interface ResponseI extends ObjectDynamicI {
+    code: number,
     message: string,
 }
 
