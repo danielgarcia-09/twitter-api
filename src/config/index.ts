@@ -1,9 +1,11 @@
 import 'dotenv/config';
 
 export const appConfig = {
-    port: process.env.PORT,
+    port: process.env.APP_PORT,
+    socketPort: +process.env.SOCKET_PORT,
     isProd: process.env.NODE_ENV === "production",
 }
+
 
 export const databaseConfig = {
     host: process.env.DB_HOST,
@@ -19,6 +21,9 @@ export const cookiesConfig = {
     name: process.env.COOKIE_NAME,
     expiration: process.env.COOKIE_EXPIRATION,
     secret: process.env.COOKIE_SECRET,
+    socket: {
+        name: process.env.SOCKET_COOKIE_NAME,
+    }
 }
 
 export const jwtConfig = {
@@ -28,8 +33,9 @@ export const jwtConfig = {
     }
 }
 
-export const encryptionConfig = {
+export const encryptionConfig: { secret: string, encoding: BufferEncoding } = {
     secret: process.env.ENCRYPTION_SECRET,
+    encoding: 'hex'
 }
 
 export const mailerConfig = {

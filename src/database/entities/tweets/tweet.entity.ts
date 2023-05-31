@@ -18,6 +18,7 @@ export class TweetEntity extends BaseEntity{
     @JoinColumn({ name: 'userId', referencedColumnName: 'id'})
     user: UserEntity
 
-    @Column({ default: true })
-    active: boolean
+    preview() {
+        return `${this.message.slice(0, Math.floor(this.message.length / 2))}...`
+    }
 }

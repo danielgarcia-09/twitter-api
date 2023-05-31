@@ -3,7 +3,7 @@ import { ConfigService } from "@nestjs/config";
 import { PassportStrategy } from "@nestjs/passport";
 import { ExtractJwt, Strategy } from "passport-jwt";
 
-import { cookiesConfig } from "src/config";
+import { cookiesConfig, encryptionConfig } from "src/config";
 import { UserEntity } from "src/database/entities";
 import { ExpressRequest } from "src/interfaces/general/general.interface";
 import { JwtPayload } from "src/interfaces/jwt/jwt.interface";
@@ -31,7 +31,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
             req.cookies &&
             req.cookies[cookiesConfig.name]
         ) {
-            let decryptedToken = `${req.cookies[cookiesConfig.name]}`.decrypt('hex');
+            let decryptedToken = `${req.cookies[cookiesConfig.name]}`.decrypt(encryptionConfig.encoding);
             return decryptedToken
         }
         return null

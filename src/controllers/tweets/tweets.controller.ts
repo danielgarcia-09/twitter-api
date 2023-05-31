@@ -49,6 +49,7 @@ export class TweetsController {
         const user = req.client;
 
         const createdTweet = await this.tweetService.createTweet({
+            user,
             userId: user.id,
             ...payload
         });

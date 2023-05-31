@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
-import { mailerConfig } from 'src/config';
+import { encryptionConfig, mailerConfig } from 'src/config';
 import mailer from 'src/helpers/mailer/mailer.helper';
 import { ResponseI } from 'src/interfaces/general/general.interface';
 import { JwtPayload } from 'src/interfaces/jwt/jwt.interface';
@@ -53,7 +53,7 @@ export class AuthService {
                 from: 'test@gmail.com',
                 to: entity.email,
                 subject: 'Welcome to Twitter',
-                text: `Welcome to Twitter, ${entity.name}! Please click on the link below to activate your account: ${mailerConfig.confirmUrl}/${token.encrypt('hex')}`,
+                text: `Welcome to Twitter, ${entity.name}! Please click on the link below to activate your account: ${mailerConfig.confirmUrl}/${token.encrypt(encryptionConfig.encoding)}`,
             })
 
             return {
@@ -79,12 +79,12 @@ export class AuthService {
 
         const token = this.jwtService.sign(jwtPayload)
 
-        return token.encrypt('hex');
+        return token.encrypt(encryptionConfig.encoding);
     }
 
     async confirmEmail(token: string): Promise<ResponseI> {
         const isToken = await this.tokenService.findOne({
-            where: { token: token.decrypt('hex') }
+            where: { token: token.decrypt(encryptionConfig.encoding) }
         })
 
         if (!isToken || isToken.expiredAt) throw new BadRequestException('Invalid token')

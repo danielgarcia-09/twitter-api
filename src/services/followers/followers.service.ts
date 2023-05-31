@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { FollowerEntity } from 'src/database/entities';
 import { FindManyOptions, Repository } from 'typeorm';
 import { UsersService } from '../users/users.service';
+import { calculateSkip } from 'src/utils/random.util';
 
 @Injectable()
 export class FollowersService {
@@ -40,7 +41,7 @@ export class FollowersService {
         return { username: following.username }
     }
 
-    async unfollow(followingUuid: string, followerUuid: string) {
+    async unFollow(followingUuid: string, followerUuid: string) {
         const followRelation = await this.followerRepository.findOne({
             where: {
                 following: {
@@ -54,6 +55,7 @@ export class FollowersService {
             select: {
                 id: true,
                 following: {
+                    uuid: true,
                     username: true
                 }
             }
@@ -63,6 +65,51 @@ export class FollowersService {
 
         await this.followerRepository.remove(followRelation);
         return { username: followRelation.following.username } 
+    }
+
+    async getFollowers(followingUuid: string, skip: number, take: number) {
+        const followers = await this.followerRepository.find({
+            where: {
+                following: {
+                    uuid: followingUuid
+                }
+            },
+            relations: ['follower'],
+            select: {
+                id: true,
+                follower: {
+                    uuid: true,
+                    username: true,
+                    name: true
+                }
+            },
+            skip: skip && calculateSkip(skip, take),
+            take
+        });
+
+        return followers.map(follower => follower.follower);
+    }
+
+    async getFollowing(followerUuid: string, skip: number, take: number) {
+        const following = await this.followerRepository.find({
+            where: {
+                follower: {
+                    uuid: followerUuid
+                }
+            },
+            relations: ['following'],
+            select: {
+                id: true,
+                following: {
+                    username: true,
+                    name: true
+                }
+            },
+            skip: skip && calculateSkip(skip, take),
+            take
+        });
+
+        return following.map(follower => follower.following);
     }
 
     async find(options: FindManyOptions<FollowerEntity>) {

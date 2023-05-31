@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 import { AppModule } from './app.module';
 import { cookiesConfig } from './config';
 import './prototypes';
+import { MainSocket } from './socket';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -22,6 +23,7 @@ async function bootstrap() {
   }))
 
   await app.listen(AppModule.port);
+  new MainSocket();
 }
 bootstrap();
 
