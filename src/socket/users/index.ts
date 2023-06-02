@@ -3,8 +3,7 @@ import { userEvents } from "src/constants";
 import { subscribeEvent } from "src/events";
 import { IUserEvent } from "src/interfaces/events/event.interface";
 import { AuthSocketMiddleware } from "../middleware";
-import { UserEntity } from "src/database/entities";
-
+import { UserSocketI } from "src/interfaces/socket/socket.interface";
 
 export class UsersSocket {
 
@@ -16,11 +15,11 @@ export class UsersSocket {
         this.connectSocket();
     }
 
-    public connectSocket() {
-        this.io.on('connection', (socket) => {
+    private connectSocket() {
+        this.io.on('connection', (socket: UserSocketI) => {
             console.log('a user connected');
 
-            const user: UserEntity = socket.data.user;
+            const user = socket.data.user;
 
             socket.join(user.uuid)
 
@@ -31,13 +30,13 @@ export class UsersSocket {
         this.setEvents();
     }
 
-    public setEvents() {
+    private setEvents() {
         this.userTweeted();
     }
 
-    public userTweeted() {
+    private userTweeted() {
         subscribeEvent.on(userEvents.tweet, (payload: IUserEvent) => {
-            const { user, tweetOwner, tweet, room } = payload;
+            const { tweetOwner, tweet, room } = payload;
             this.io.to(room).emit(userEvents.tweet, {
                 message: `${tweetOwner} tweeted something new! ${tweet.preview()}`,
                 tweetReference: tweet.uuid

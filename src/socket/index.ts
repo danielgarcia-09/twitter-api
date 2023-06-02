@@ -17,7 +17,6 @@ export class MainSocket {
     public connectSocket() {
         this.io.on('connection', (socket) => {
             console.log('MainSocket connected');
-
             
             socket.on('disconnect', () => {
                 console.log('MainSocket disconnected');

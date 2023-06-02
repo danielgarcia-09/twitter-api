@@ -1,11 +1,11 @@
-import { Socket } from "socket.io";
 import jwt from "jsonwebtoken";
-import { cookiesConfig, encryptionConfig, jwtConfig } from "src/config";
-import { JwtPayload } from "src/interfaces/jwt/jwt.interface";
-import { UserEntity } from "src/database/entities";
 import { ExtendedError } from "socket.io/dist/namespace";
+import { cookiesConfig, encryptionConfig, jwtConfig } from "src/config";
+import { UserEntity } from "src/database/entities";
+import { JwtPayload } from "src/interfaces/jwt/jwt.interface";
+import { UserSocketI } from "src/interfaces/socket/socket.interface";
 
-export const AuthSocketMiddleware = async (socket: Socket, next: (err?: ExtendedError) => void) => {
+export const AuthSocketMiddleware = async (socket: UserSocketI, next: (err?: ExtendedError) => void) => {
 
     const unauthorizedErr = () => next(new Error('Unauthorized'));
     try {
